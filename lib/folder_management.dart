@@ -240,17 +240,25 @@ class _FolderPageState extends State<FolderPage> {
             ],
           ),
         ),
+        
         actions: [
+          
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('ยกเลิก'),
+            child: const Text('ยกเลิก', style: TextStyle(color: Colors.black)),
           ),
-          ElevatedButton(
+          
+          TextButton(
             onPressed: () {
               Navigator.pop(context);
               addFolder();
             },
-            child: const Text('สร้าง'),
+
+            style: TextButton.styleFrom(
+              backgroundColor: const Color(0xFF6479FF),
+            ),
+
+            child: const Text('สร้าง', style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -265,8 +273,12 @@ class _FolderPageState extends State<FolderPage> {
     
     showDialog(
       context: context,
+
       builder: (context) => AlertDialog(
+        backgroundColor: const Color(0xFFF8F9FF),
+        
         title: const Text('แก้ไขโฟลเดอร์'),
+        
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -288,20 +300,47 @@ class _FolderPageState extends State<FolderPage> {
             ],
           ),
         ),
+        
+        // ปุ่มบันทึก + ยกเลิก ของส่วนแก้ไขโฟลเดอร์
         actions: [
+          
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('ยกเลิก'),
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.only(bottom: 3,top: 3,left: 10,right: 10),
+              backgroundColor: Colors.transparent, // โปร่งใส
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+
+            child: const Text('ยกเลิก',
+              style: TextStyle(color: Colors.black,fontWeight: FontWeight.w500,fontSize: 16),
+            ),
           ),
-          ElevatedButton(
+
+
+
+          TextButton(
             onPressed: () {
               Navigator.pop(context);
               editFolder(folder['id']);
             },
-            child: const Text('บันทึก'),
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.only(bottom: 3,top: 3,left: 10,right: 10),
+              backgroundColor: const Color(0xFF4F6BFF),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+
+            child: const Text('บันทึก',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+                fontSize: 16
+              )
+            ),
           ),
         ],
       ),
+
     );
   }
   
@@ -312,18 +351,22 @@ class _FolderPageState extends State<FolderPage> {
       builder: (context) => AlertDialog(
         title: const Text('ยืนยันการลบโฟลเดอร์'),
         content: Text('คุณต้องการลบโฟลเดอร์ "${folder['name']}" ใช่หรือไม่?'),
+        
+        // ปุ่มบันทึก + ยกเลิก ของส่วนแก้ไขโฟลเดอร์
         actions: [
+          
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('ยกเลิก'),
+            child: const Text('ยกเลิก', style: TextStyle(color: Colors.black)),
           ),
-          ElevatedButton(
+
+          TextButton(
             onPressed: () {
               Navigator.pop(context);
               deleteFolder(folder['id']);
             },
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            child: const Text('ลบ'),
+            style: TextButton.styleFrom(backgroundColor: Colors.red),
+            child: const Text('ลบ', style: TextStyle(color: Colors.white)),
           ),
         ],
       ),

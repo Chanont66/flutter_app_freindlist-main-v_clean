@@ -59,28 +59,22 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
-          'โปรไฟล์',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        backgroundColor: Colors.blue.shade50,
+        title: const Text('โปรไฟล์', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,)),
+        backgroundColor: Colors.transparent,
         toolbarHeight: 70,
         elevation: 0,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(20),
-          ),
-        ),
+        // ปุ่มกลับไปหน้า home (จริงๆเป็นการรปิดหน้านี้)
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, color: Colors.blue.shade700, size: 22),
           onPressed: () => Navigator.pop(context),
         ),
       ),
+
+
+
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -93,6 +87,8 @@ class _ProfilePageState extends State<ProfilePage> {
               Center(
                 child: Column(
                   children: [
+                    
+                    // รูปโปรไฟล์
                     CircleAvatar(
                       radius: 50,
                       backgroundColor: Colors.blue.shade50,
@@ -106,72 +102,69 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    Text(
-                      '${widget.user['fname']} ${widget.user['lname']}',
-                      style: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
+
+
+                    Text('${widget.user['fname']} ${widget.user['lname']}',
+                      style: const TextStyle( fontSize: 22,fontWeight: FontWeight.bold ),
                     ),
                     const SizedBox(height: 4),
-                    Text(
-                      '@${widget.user['username']}',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey.shade600,
-                      ),
+
+
+                    Text('@${widget.user['username']}',
+                     style: TextStyle( fontSize: 16,color: Colors.grey.shade600 ),
                     ),
                     const SizedBox(height: 16),
+
+
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                       decoration: BoxDecoration(
                         color: Colors.blue.shade50,
                         borderRadius: BorderRadius.circular(20),
                       ),
+                      
                       child: Row(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize: MainAxisSize.min, // ทำให้ขนาดเล็กแบบพอดีๆ
                         children: [
+
                           Icon(Icons.verified, size: 16, color: Colors.blue.shade600),
                           const SizedBox(width: 4),
-                          Text(
-                            'ยืนยันแล้ว',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.blue.shade600,
-                            ),
-                          ),
+                          Text( 'ยืนยันแล้ว', style: TextStyle( fontSize: 14,color: Colors.blue.shade600 )),
+                        
                         ],
                       ),
                     ),
+
+
                   ],
                 ),
               ),
               
               const SizedBox(height: 40),
               
-              // หัวข้อส่วนข้อมูลผู้ใช้
-              const Text(
-                'ข้อมูลผู้ใช้',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black87,
-                ),
+              // ข้อมูลผู้ใช้
+              const Text('ข้อมูลผู้ใช้',
+                style: TextStyle( fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black87 ),
               ),
               
               const SizedBox(height: 16),
               
-              // รายการข้อมูลผู้ใช้แบบเรียบง่าย
-              _buildUserInfoRow('ชื่อผู้ใช้', widget.user['username']),
-              const Divider(height: 1, thickness: 0.5),
+              // รายการข้อมูล
+              // เรียก _buildUserInfoRow โดยส่ง label และ value จาก widget.user ไป
+              _buildUserInfoRow('ชื่อผู้ใช้', widget.user['username']),  
+              const Divider(height: 1, thickness: 0.5), // เส้นใต้
+
               _buildUserInfoRow('ชื่อจริง', widget.user['fname']),
-              const Divider(height: 1, thickness: 0.5),
+              const Divider(height: 1, thickness: 0.5), // เส้นใต้
+
               _buildUserInfoRow('นามสกุล', widget.user['lname']),
-              const Divider(height: 1, thickness: 0.5),
+              const Divider(height: 1, thickness: 0.5), // เส้นใต้
+
               _buildUserInfoRow('เบอร์โทรศัพท์', phoneNumber),
               
               const SizedBox(height: 32),
               
+
               // ปุ่มแก้ไขโปรไฟล์ กดแล้วเรียก _showEditProfileDialog
               SizedBox(
                 width: double.infinity,
@@ -180,16 +173,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue.shade600,
                     padding: const EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
+                    shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(8) ),
                   ),
                   child: const Text('แก้ไขโปรไฟล์',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                    ),
+                    style: TextStyle( fontSize: 16, fontWeight: FontWeight.w500,color: Colors.white ),
                   ),
                 ),
               ),
@@ -205,31 +192,28 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget _buildUserInfoRow(String label, String value) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
+      
       child: Row(
         children: [
+          // ขึ้น label ที่ส่งมา
           SizedBox(
             width: 100,
-            child: Text(
-              label,
-              style: const TextStyle(
-                fontSize: 14,
-                color: Colors.black54,
-              ),
+            child: Text( label,style: const TextStyle(fontSize: 14, color: Colors.black54 ),
             ),
           ),
+          
           Expanded(
-            child: Text(
-              value,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
+            // ข้อมูลจาก value (widget.user['...'])
+            child: Text(value,style: const TextStyle( fontSize: 14, fontWeight: FontWeight.w500,),
             ),
           ),
         ],
       ),
     );
   }
+
+
+
 
   // Function to show the edit profile dialog
   void _showEditProfileDialog() {
@@ -242,14 +226,13 @@ class _ProfilePageState extends State<ProfilePage> {
         return StatefulBuilder(
           builder: (dialogContext, setDialogState) {
             return AlertDialog(
-              title: const Text(
-                'แก้ไขข้อมูลส่วนตัว',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+              backgroundColor: const Color(0xFFF8F9FF),
+              title: const Text( 'แก้ไขข้อมูลส่วนตัว',
+                style: TextStyle( fontSize: 18,fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
+
+
               content: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -276,25 +259,19 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                     
-                    if (isLoading)
-                      const Padding(
-                        padding: EdgeInsets.only(top: 16),
-                        child: Center(child: CircularProgressIndicator()),
-                      ),
                   ],
                 ),
               ),
               actions: [
+                
                 TextButton(
-                  onPressed: () {
-                    Navigator.of(dialogContext).pop();
-                  },
-                  child: Text(
-                    'ยกเลิก',
-                    style: TextStyle(color: Colors.grey.shade600),
-                  ),
+                  onPressed: () { Navigator.of(dialogContext).pop(); },
+                  child: Text( 'ยกเลิก',style: TextStyle(color: Colors.grey.shade600)),
                 ),
+
+                
                 ElevatedButton(
+                  // เช็คว่า isLoading เป็น true , false ถ้า true ไม่สามารถกดปุ่มได้ ถ้า false จะเรียก _updateProfile แล้วส่ง dialogContext และ setDialogState
                   onPressed: isLoading 
                       ? null 
                       : () => _updateProfile(dialogContext, setDialogState),
@@ -304,8 +281,38 @@ class _ProfilePageState extends State<ProfilePage> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: const Text('บันทึก'),
+
+                  child: isLoading ?
+                  // true
+                  const SizedBox(
+                    height: 20, width: 40,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 16,
+                          width: 16,
+                          child: CircularProgressIndicator( // วงกลมโหลดๆ หมุนๆ
+                            strokeWidth: 2.5, // ความหนา
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                  
+                  : // false
+                  const SizedBox(
+                    child: Text('บันทึก',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16
+                      )
+                    ),
+                  ),
                 ),
+                
               ],
             );
           }

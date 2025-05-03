@@ -498,12 +498,18 @@ class _FolderDetailPageState extends State<FolderDetailPage> {
       context: context,
       builder: (context) => StatefulBuilder(
         builder: (context, setDialogState) {
+          
           return AlertDialog(
+            backgroundColor: const Color(0xFFF8F9FF) ,
             title: const Text('เพิ่มสมาชิกใหม่'),
-            content: SingleChildScrollView(
+            content: SizedBox(
+              height: 300,
+            child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  
+                  const SizedBox(height: 20),
                   TextField(
                     controller: _fnameController,
                     decoration: const InputDecoration(
@@ -515,6 +521,7 @@ class _FolderDetailPageState extends State<FolderDetailPage> {
                     },
                   ),
                   const SizedBox(height: 12),
+                  
                   TextField(
                     controller: _lnameController,
                     decoration: const InputDecoration(
@@ -522,6 +529,7 @@ class _FolderDetailPageState extends State<FolderDetailPage> {
                     ),
                   ),
                   const SizedBox(height: 12),
+                  
                   TextField(
                     controller: _nicknameController,
                     decoration: const InputDecoration(
@@ -533,6 +541,7 @@ class _FolderDetailPageState extends State<FolderDetailPage> {
                     },
                   ),
                   const SizedBox(height: 12),
+                  
                   TextField(
                     controller: _phoneController,
                     decoration: InputDecoration(
@@ -551,6 +560,7 @@ class _FolderDetailPageState extends State<FolderDetailPage> {
                     },
                   ),
                   const SizedBox(height: 12),
+                  
                   TextField(
                     controller: _emailController,
                     decoration: InputDecoration(
@@ -565,6 +575,7 @@ class _FolderDetailPageState extends State<FolderDetailPage> {
                     },
                   ),
                   const SizedBox(height: 12),
+                  
                   TextField(
                     controller: _photoUrlController,
                     decoration: const InputDecoration(
@@ -574,6 +585,7 @@ class _FolderDetailPageState extends State<FolderDetailPage> {
                     keyboardType: TextInputType.url,
                   ),
                   const SizedBox(height: 12),
+                  
                   TextField(
                     controller: _noteController,
                     decoration: const InputDecoration(
@@ -584,12 +596,21 @@ class _FolderDetailPageState extends State<FolderDetailPage> {
                 ],
               ),
             ),
+            ),
+            
+            
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('ยกเลิก'),
+                child: const Text('ยกเลิก' , style: TextStyle(color: Colors.black),),
               ),
-              ElevatedButton(
+
+              TextButton(
+                style: TextButton.styleFrom(
+                  disabledBackgroundColor: Colors.grey,
+                  disabledForegroundColor: Colors.blueGrey,
+                  backgroundColor: Colors.blueAccent
+                ),
                 // ปุ่มจะเปิดใช้งานได้เฉพาะเมื่อมีชื่อหรือชื่อเล่น และข้อมูลอื่นผ่านการตรวจสอบ
                 onPressed: (validateRequiredFields() && _isPhoneValid && _isEmailValid)
                   ? () {
@@ -597,7 +618,7 @@ class _FolderDetailPageState extends State<FolderDetailPage> {
                       addFriend();
                     }
                   : null,
-                child: const Text('เพิ่ม'),
+                child: const Text('เพิ่ม' , style: TextStyle(color: Colors.white),),
               ),
             ],
           );
@@ -627,13 +648,19 @@ class _FolderDetailPageState extends State<FolderDetailPage> {
       context: context,
       builder: (context) => StatefulBuilder(
         builder: (context, setDialogState) {
+          
           return AlertDialog(
+            backgroundColor: const Color(0xFFF8F9FF),
             title: const Text('แก้ไขข้อมูลสมาชิก'),
-            content: SingleChildScrollView(
+            
+            content: SizedBox(
+            height: 300,
+            child:SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   
+                  const SizedBox(height: 20),
                   TextField(
                     controller: _fnameController,
                     decoration: const InputDecoration(
@@ -720,12 +747,22 @@ class _FolderDetailPageState extends State<FolderDetailPage> {
                 ],
               ),
             ),
+            ), 
+            
+            
+            // ปุ่มบันทึก + ยกเลิก ของแก้ไขข้อมูล
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('ยกเลิก'),
+                child: const Text('ยกเลิก', style: TextStyle(color: Colors.black)),
               ),
-              ElevatedButton(
+
+              TextButton(
+                style: TextButton.styleFrom(
+                  disabledBackgroundColor: Colors.grey,
+                  disabledForegroundColor: Colors.blueGrey,
+                  backgroundColor: Colors.blueAccent
+                ),
                 // ปุ่มจะเปิดใช้งานได้เฉพาะเมื่อมีชื่อหรือชื่อเล่น และข้อมูลอื่นผ่านการตรวจสอบ
                 onPressed: (validateRequiredFields() && _isPhoneValid && _isEmailValid)
                   ? () {
@@ -733,7 +770,7 @@ class _FolderDetailPageState extends State<FolderDetailPage> {
                       editFriend(friend['id']);
                     }
                   : null,
-                child: const Text('บันทึก'),
+                child: const Text('บันทึก', style: TextStyle(color: Colors.white)),
               ),
             ],
           );
@@ -756,16 +793,16 @@ class _FolderDetailPageState extends State<FolderDetailPage> {
           
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('ยกเลิก'),
+            child: const Text('ยกเลิก', style: TextStyle(color: Colors.black)),
           ),
           
-          ElevatedButton(
+          TextButton(
             onPressed: () {
               Navigator.pop(context); // ปิดไดอะล็อก
               deleteFriend(friend['id']); // ด้วยการใช้ ID หาว่าจะลบใคร
             },
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            child: const Text('ลบ'),
+            style: TextButton.styleFrom(backgroundColor: Colors.red),
+            child: const Text('ลบ', style: TextStyle(color: Colors.white)),
           ),
 
         ],
@@ -918,11 +955,12 @@ class _FolderDetailPageState extends State<FolderDetailPage> {
                               ),
                               const SizedBox(height: 24),
                               
+
+                              // ปุ่มเพิ่มสมาชิกใหม่ ตอนไม่มีสมาชิกเลย
                               ElevatedButton.icon(
                                 onPressed: _showAddFriendDialog,
-                                icon: const Icon(Icons.person_add),
-                                label: const Text('เพิ่มสมาชิกใหม่'),
-
+                                icon: const Icon(Icons.person_add ,color: Colors.blueAccent),
+                                label: const Text('เพิ่มสมาชิกใหม่', style: TextStyle(color: Colors.blueAccent)),
                               ),
                               
                             ],
