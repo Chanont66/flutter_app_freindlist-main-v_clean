@@ -1,0 +1,23 @@
+name: flutter_app_freindlist
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.5.0 <4.0.0'  # Modified to work with Dart 3.5.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_fonts: ^6.1.0 #โหลดฟอนต์
+  cupertino_icons: ^1.0.6
+  http: ^1.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
